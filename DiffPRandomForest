@@ -1,0 +1,42 @@
+import mdrf1 as mf
+import random
+
+def randomforest(dataSet):
+     sub=[]
+     cT=[]
+     B=15
+     d=5
+     eps=B/20
+##     print(eps)
+     ep=eps/12
+
+     bStrap=bootstrap(dataSet)
+     for s in bStrap:
+          l0=s[0]
+          A=l0[:-1]
+          c=[ex[-1]for ex in s[1:]]
+          c1=set(c)
+          C=list(c1)
+          crT=mf.Build_DiffPID3(s[1:],A,C,d,ep)
+          cT.append(crT)
+     return cT
+def bootstrap(dat):
+     l=len(dat)
+     bs=[]
+     bbs=[]
+     p=dat[0]
+     for x in range(20):
+          bs=sampl(dat)
+          bbs.append(bs)
+     for i in range(len(bbs)):
+          bbs[i].insert(0,p)
+     return bbs
+
+def sampl(dat):
+     w=[]
+     l=len(dat)
+     for i in range(l-1):
+          oo=random.choice(dat[1:])
+          w.append(oo)
+          #ww=mat(w)
+     return w
