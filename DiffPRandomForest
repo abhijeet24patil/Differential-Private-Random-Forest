@@ -40,3 +40,14 @@ def sampl(dat):
           w.append(oo)
           #ww=mat(w)
      return w
+
+def createDataSet(fileName):
+     dst=[]
+     fr=open(fileName)
+     for line in fr.readlines():
+          curLine=line.strip().split('\t')
+          rr=[]
+          for word in curLine:
+               rr=word.strip().split(',')
+          dst.append(rr)
+     return dst
